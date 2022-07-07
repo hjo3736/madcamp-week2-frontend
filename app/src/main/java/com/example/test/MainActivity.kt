@@ -1,0 +1,27 @@
+package com.example.test
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val leadButton = findViewById<Button>(R.id.button_Leaderboard)
+
+        leadButton.setOnClickListener{
+
+            val leader = Intent(this, LeaderBoard::class.java)
+            startActivity(leader)
+            finish()
+
+        }
+
+    }
+
+}
