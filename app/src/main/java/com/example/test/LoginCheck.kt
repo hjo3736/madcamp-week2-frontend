@@ -56,7 +56,38 @@ class LoginCheck : AppCompatActivity() {
 
         if(GoogleSignIn.getLastSignedInAccount(this) != null){
 
+            queue = Volley.newRequestQueue(this)
+
+            if (queue != null) {
+
+                val log = ip + "/user/login/email/" + GoogleSignIn.getLastSignedInAccount(this)?.email.toString()
+
+                val stringRequest = StringRequest(Request.Method.GET,
+                    log,
+                    { response ->
+                        if (response == "YES") {
+                            val main = Intent(this, MainActivity::class.java)
+                            main.putExtra("email",GoogleSignIn.getLastSignedInAccount(this)?.email.toString())
+                            startActivity(main)
+                            finish()
+                        }
+                    },
+                    { error ->
+                        if (error.networkResponse.statusCode == 404) {
+                            val signUp = Intent(this, SignUP::class.java)
+                            signUp.putExtra("key", GoogleSignIn.getLastSignedInAccount(this)?.email.toString())
+                            startActivity(signUp)
+                            finish()
+                        }
+                    }
+                )
+
+                stringRequest.setShouldCache(false)
+                queue.add(stringRequest)
+            }
+
             val main = Intent(this, MainActivity::class.java)
+            main.putExtra("email",GoogleSignIn.getLastSignedInAccount(this)?.email.toString())
             startActivity(main)
             finish()
 
@@ -81,40 +112,41 @@ class LoginCheck : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        when(requestCode){
+        when (requestCode) {
 
             GOOGLE_LOGIN -> {
 
                 val task = Auth.GoogleSignInApi.getSignInResultFromIntent(data!!)
-                if(task!!.isSuccess){
+                if (task!!.isSuccess) {
 
-                    if(queue != null){
+                    queue = Volley.newRequestQueue(this)
+
+                    if (queue != null) {
 
                         val log = ip + "/user/login/email/" + task.signInAccount!!.email
 
                         val stringRequest = StringRequest(Request.Method.GET,
-                        log,
-                        Response.Listener<String>{ response ->
-                            if(response == "YES"){
+                            log,
+                            { response ->
+                                if(response == "YES"){
 
-                                val main = Intent(this, MainActivity::class.java)
-                                startActivity(main)
-                                finish()
+                                    val main = Intent(this, MainActivity::class.java)
+                                    main.putExtra("email",task.signInAccount!!.email)
+                                    startActivity(main)
+                                    finish()
 
-                            }else{
+                                }
+                            },
+                            { error ->
+                                if (error.networkResponse.statusCode == 404) {
 
-                                val signUp = Intent(this, SignUP::class.java)
-
-                                signUp.putExtra("key",task.signInAccount!!.email)
-                                startActivity(signUp)
-                                finish()
-
-                            }
-
-                        },
-                        Response.ErrorListener{error ->
-                            Log.d("bye",error.message.toString())
-                        })
+                                    val signUp = Intent(this, SignUP::class.java)
+                                    signUp.putExtra("key",task.signInAccount!!.email)
+                                    startActivity(signUp)
+                                    finish()
+                                    // Log.d("bye",error.message.toString())
+                                }
+                            })
 
                         stringRequest.setShouldCache(false)
                         queue.add(stringRequest)

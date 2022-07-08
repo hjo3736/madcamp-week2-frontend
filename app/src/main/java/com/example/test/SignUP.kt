@@ -25,7 +25,6 @@ class SignUP : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        val userImage = findViewById<ImageView>(R.id.userImage)
         val button = findViewById<Button>(R.id.button_sign_up)
         val textEmail = findViewById<EditText>(R.id.editTextEmail)
         val textNickname = findViewById<EditText>(R.id.editTextNickname)
@@ -63,6 +62,7 @@ class SignUP : AppCompatActivity() {
                 Response.Listener<String>{ response ->
 
                     val main = Intent(this, MainActivity::class.java)
+                    main.putExtra("email", email)
                     startActivity(main)
                     finish()
 

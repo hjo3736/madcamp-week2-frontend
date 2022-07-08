@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyInfo">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/fonts"
+        android:text="My Profile"
+        android:textColor="#000"
+        android:textSize="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/fonts"
+        android:paddingLeft="25dp"
+        android:text="email"
+        android:textColor="#000"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/memailinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fonts"
+        android:paddingLeft="25dp"
+        android:text="email info"
+        android:textColor="#000"
+        android:textSize="35dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_email" />
+
+    <TextView
+        android:id="@+id/text_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/fonts"
+        android:paddingLeft="25dp"
+        android:text="Nickname"
+        android:textColor="#000"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/memailinfo" />
+
+    <TextView
+        android:id="@+id/mnicknameinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fonts"
+        android:paddingLeft="25dp"
+        android:text="nickname info"
+        android:textColor="#000"
+        android:textSize="35dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_nickname" />
+
+    <TextView
+        android:id="@+id/text_school"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/fonts"
+        android:paddingLeft="25dp"
+        android:text="School"
+        android:textColor="#000"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/mnicknameinfo" />
+
+    <TextView
+        android:id="@+id/mschoolinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fonts"
+        android:paddingLeft="25dp"
+        android:text="school info"
+        android:textColor="#000"
+        android:textSize="35dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_school" />
+
+    <TextView
+        android:id="@+id/text_elo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/fonts"
+        android:paddingLeft="25dp"
+        android:text="Elo-Rating"
+        android:textColor="#000"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/mschoolinfo" />
+
+    <TextView
+        android:id="@+id/meloinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fonts"
+        android:paddingLeft="25dp"
+        android:text="elo info"
+        android:textColor="#000"
+        android:textSize="35dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_elo" />
+
+    <Button
+        android:id="@+id/button_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meloinfo"
+        android:text="로그아웃"/>
+
+    <Button
+        android:id="@+id/button_quit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meloinfo"
+        android:text="계정탈퇴"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
