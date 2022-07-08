@@ -1,10 +1,12 @@
 package com.example.test
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -62,46 +64,82 @@ class MyInfo : AppCompatActivity() {
 
         signOutButton.setOnClickListener{
 
-            val start = Intent(this, Splash::class.java)
-            startActivity(start)
-            finish()
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.requestsignout)
 
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
-            mGoogleSignInClient = GoogleSignIn.getClient(this,gso)
-            mGoogleSignInClient.signOut()
+            val buttonyes = dialog.findViewById<ImageButton>(R.id.buttonyes)
+            val buttonno = dialog.findViewById<ImageButton>(R.id.buttonno)
+
+            buttonyes.setOnClickListener{
+
+                val start = Intent(this, Splash::class.java)
+                startActivity(start)
+                finish()
+
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+                mGoogleSignInClient = GoogleSignIn.getClient(this,gso)
+                mGoogleSignInClient.signOut()
+
+            }
+
+            buttonno.setOnClickListener{
+
+                dialog.dismiss()
+
+            }
+
+            dialog.show()
 
         }
 
         quitButton.setOnClickListener{
 
-            queue = Volley.newRequestQueue(this)
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.requestquit)
 
-            if(queue != null) {
+            val buttonyes = dialog.findViewById<ImageButton>(R.id.buttonyes1)
+            val buttonno = dialog.findViewById<ImageButton>(R.id.buttonno1)
 
-                val log = ip + "/user/delete/email/" + email
+            buttonyes.setOnClickListener {
 
-                val stringRequest = StringRequest(Request.Method.DELETE,
-                    log,
-                    Response.Listener { response ->
+                queue = Volley.newRequestQueue(this)
 
-                        val start = Intent(this, Splash::class.java)
-                        startActivity(start)
-                        finish()
+                if (queue != null) {
 
-                        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                            .requestEmail().build()
-                        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-                        mGoogleSignInClient.signOut()
+                    val log = ip + "/user/delete/email/" + email
 
-                    },
-                    Response.ErrorListener {error ->
-                        Log.d("why?", error.message.toString())
-                    })
+                    val stringRequest = StringRequest(Request.Method.DELETE,
+                        log,
+                        Response.Listener { response ->
 
-                stringRequest.setShouldCache(false)
-                queue.add(stringRequest)
+                            val start = Intent(this, Splash::class.java)
+                            startActivity(start)
+                            finish()
+
+                            val gso =
+                                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                    .requestEmail().build()
+                            mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+                            mGoogleSignInClient.signOut()
+
+                        },
+                        Response.ErrorListener { error ->
+                            Log.d("why?", error.message.toString())
+                        })
+
+                    stringRequest.setShouldCache(false)
+                    queue.add(stringRequest)
+                }
 
             }
+
+            buttonno.setOnClickListener{
+
+                dialog.dismiss()
+
+            }
+
+            dialog.show()
 
         }
 

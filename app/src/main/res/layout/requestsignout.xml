@@ -15,7 +15,7 @@
         android:layout_marginBottom="70dp"
         android:fontFamily="@font/font"
         android:gravity="center"
-        android:text="정말로 계정탈퇴 하시겠습니까?"
+        android:text="정말로 로그아웃 하시겠습니까?"
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,19 +24,19 @@
 
 
     <ImageButton
-        android:id="@+id/buttonyes1"
+        android:id="@+id/buttonyes"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="128dp"
         android:background="@drawable/yes"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonno1"
+        app:layout_constraintEnd_toStartOf="@+id/buttonno"
         app:layout_constraintHorizontal_bias="0.013"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/buttonno1"
+        android:id="@+id/buttonno"
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_marginEnd="128dp"

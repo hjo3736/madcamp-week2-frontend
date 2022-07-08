@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2985" />
+        <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/drawable/buttonyes.xml" value="0.3365" />
+        <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/drawable/leaderboard.xml" value="0.1" />
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/drawable/userinfo.xml" value="0.2985" />
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/font/font.xml" value="0.4161458333333333" />
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/layout/activity_leader_board.xml" value="0.19895833333333332" />
@@ -12,7 +14,7 @@
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/layout/activity_my_info.xml" value="0.1" />
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/layout/activity_sign_up.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/layout/item_recycler.xml" value="0.19895833333333332" />
-        <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/layout/requestquit.xml" value="0.18819655521783182" />
+        <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/layout/requestquit.xml" value="0.1" />
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/madcamp-week2-frontend/app/src/main/res/layout/user_info.xml" value="0.33" />
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/test/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14" />
         <entry key="..\:/Users/hjo37/AndroidStudioProjects/test/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14" />
