@@ -23,18 +23,23 @@ import com.android.volley.toolbox.Volley
 import java.security.AccessController.getContext
 
 lateinit var queue : RequestQueue
-val ip = "http://172.10.5.121"
+val ip = "http://172.10.18.128"
 
-val data = ArrayList<LeaderboardData>()
+var data = ArrayList<LeaderboardData>()
 lateinit var context1: Context
+
 class LeaderBoard : AppCompatActivity() {
+
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         context1 = context
         return super.onCreateView(name, context, attrs)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_leader_board)
+
+        data = ArrayList<LeaderboardData>()
 
         queue = Volley.newRequestQueue(this)
 

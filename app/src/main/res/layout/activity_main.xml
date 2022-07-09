@@ -15,6 +15,17 @@
         android:text="순위표"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_Matching" />
+
+    <Button
+        android:id="@+id/button_Matching"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="매칭시작"
+        app:layout_constraintBottom_toTopOf="@+id/button_Leaderboard"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,11 +35,11 @@
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:background="#00ff0000"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/usericon"
-        android:scaleType="centerCrop"
-        android:background="#00ff0000"/>
+        app:srcCompat="@drawable/usericon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

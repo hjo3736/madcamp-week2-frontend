@@ -24,7 +24,7 @@ class LoginCheck : AppCompatActivity() {
     val GOOGLE_LOGIN = 1000
     lateinit var mGoogleSignInClient : GoogleSignInClient
     lateinit var queue : RequestQueue
-    val ip = "http://172.10.5.121"
+    val ip = "http://172.10.18.128"
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -127,7 +127,7 @@ class LoginCheck : AppCompatActivity() {
 
                         val stringRequest = StringRequest(Request.Method.GET,
                             log,
-                            { response ->
+                            Response.Listener{ response ->
                                 if(response == "YES"){
 
                                     val main = Intent(this, MainActivity::class.java)
@@ -137,14 +137,15 @@ class LoginCheck : AppCompatActivity() {
 
                                 }
                             },
-                            { error ->
+                            Response.ErrorListener{ error ->
                                 if (error.networkResponse.statusCode == 404) {
 
                                     val signUp = Intent(this, SignUP::class.java)
                                     signUp.putExtra("key",task.signInAccount!!.email)
                                     startActivity(signUp)
                                     finish()
-                                    // Log.d("bye",error.message.toString())
+
+
                                 }
                             })
 
