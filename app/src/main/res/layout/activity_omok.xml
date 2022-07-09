@@ -39,6 +39,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/myNicknameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -47,6 +48,7 @@
                     android:text="Nickname1" />
 
                 <TextView
+                    android:id="@+id/myRatingTextView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -73,6 +75,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:id="@+id/opponentNicknameTextView"
                     android:layout_marginTop="4dp"
                     android:layout_weight="1"
                     android:textAlignment="viewEnd"
@@ -84,6 +87,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:layout_marginBottom="4dp"
+                    android:id="@+id/opponentRatingTextView"
                     android:textAlignment="viewEnd"
                     android:fontFamily="@font/font"
                     android:text="Rating2" />

@@ -23,7 +23,7 @@ import com.android.volley.toolbox.Volley
 import java.security.AccessController.getContext
 
 lateinit var queue : RequestQueue
-val ip = "http://172.10.18.128"
+val ip = "http://192.249.18.128"
 
 var data = ArrayList<LeaderboardData>()
 lateinit var context1: Context

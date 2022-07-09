@@ -5,15 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import com.github.nkzawa.emitter.Emitter
-import com.github.nkzawa.socketio.client.IO
-import com.github.nkzawa.socketio.client.Socket
-
-
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var socket : Socket
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         matchingButton.setOnClickListener{
 
             val matching = Intent(this, OmokActivity::class.java)
+<<<<<<< Updated upstream
+=======
+            matching.putExtra("email", email)
+>>>>>>> Stashed changes
             startActivity(matching)
 
         }
