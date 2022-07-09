@@ -22,10 +22,7 @@ class MainActivity : AppCompatActivity() {
         matchingButton.setOnClickListener{
 
             val matching = Intent(this, OmokActivity::class.java)
-<<<<<<< Updated upstream
-=======
             matching.putExtra("email", email)
->>>>>>> Stashed changes
             startActivity(matching)
 
         }
