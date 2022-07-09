@@ -33,7 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="이름" />
+                android:text="이름"
+                android:fontFamily="@font/font"/>
 
             <TextView
                 android:id="@+id/forNickname"
@@ -42,13 +43,15 @@
                 android:layout_marginBottom="20dp"
                 android:text="이름 들어갈 곳"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:fontFamily="@font/font"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="소속" />
+                android:text="소속"
+                android:fontFamily="@font/font"/>
 
             <TextView
                 android:id="@+id/forSchool"
@@ -57,13 +60,15 @@
                 android:layout_marginBottom="20dp"
                 android:text="소속 들어갈 곳"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:fontFamily="@font/font"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="점수" />
+                android:text="점수"
+                android:fontFamily="@font/font"/>
 
             <TextView
                 android:id="@+id/forelorating"
@@ -72,11 +77,13 @@
                 android:layout_marginBottom="20dp"
                 android:text="점수 들어갈 곳"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:fontFamily="@font/font"/>
 
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/schoolimage"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_weight="5"

@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         matchingButton.setOnClickListener{
 
-            val matching = Intent(this, LeaderBoard::class.java)
+            val matching = Intent(this, OmokActivity::class.java)
             startActivity(matching)
 
         }

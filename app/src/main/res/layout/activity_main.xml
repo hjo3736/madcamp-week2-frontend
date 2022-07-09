@@ -8,26 +8,29 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
+    <ImageButton
         android:id="@+id/button_Leaderboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="순위표"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/round"
+        android:background="#00FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_Matching" />
+        app:layout_constraintStart_toEndOf="@+id/button_Matching" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button_Matching"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="매칭시작"
-        app:layout_constraintBottom_toTopOf="@+id/button_Leaderboard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/roundtest"
+        android:background="#00FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_Leaderboard"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/myprofile"
@@ -35,11 +38,34 @@
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:background="#00ff0000"
+        android:background="#00FF0000"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/usericon" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FF0000"
+        app:layout_constraintBottom_toTopOf="@+id/button_Matching"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/qkenrtkwls" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font"
+        android:text="오목의 달인"
+        android:textColor="#000000"
+        android:textSize="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

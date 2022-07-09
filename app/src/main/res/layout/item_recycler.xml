@@ -18,7 +18,9 @@
         android:fontFamily="@font/fonts"
         android:text="Elo-Rating"
         android:textColor="#000"
-        android:autoSizeTextType="uniform"/>
+        android:textSize="20sp"
+        android:singleLine="true"
+        android:ellipsize="marquee"/>
 
     <TextView
         android:id="@+id/nickname"
@@ -27,11 +29,12 @@
         android:layout_weight="3"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_gravity="center"
         android:fontFamily="@font/fonts"
         android:text="Elo-Rating"
         android:textColor="#000"
-        android:autoSizeTextType="uniform"/>
+        android:textSize="20sp"
+        android:singleLine="true"
+        android:ellipsize="marquee"/>
 
     <TextView
         android:id="@+id/school"
@@ -44,7 +47,9 @@
         android:fontFamily="@font/fonts"
         android:text="Elo-Rating"
         android:textColor="#000"
-        android:autoSizeTextType="uniform"/>
+        android:textSize="20sp"
+        android:singleLine="true"
+        android:ellipsize="marquee"/>
 
     <TextView
         android:id="@+id/elo_Rating"
@@ -57,7 +62,9 @@
         android:fontFamily="@font/fonts"
         android:text="Elo-Rating"
         android:textColor="#000"
-        android:autoSizeTextType="uniform"
-        android:gravity="right"/>
+        android:textSize="20sp"
+        android:gravity="right"
+        android:singleLine="true"
+        android:ellipsize="marquee"/>
 
 </LinearLayout>
