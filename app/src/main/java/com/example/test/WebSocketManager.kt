@@ -15,7 +15,7 @@ object WebSocketManager {
     private lateinit var request: Request
     private lateinit var messageListener: MessageListener
     private lateinit var mWebSocket: WebSocket
-    private var isConnect = false
+    private var isConnected = false
     private var connectNum = 0
     fun init(url: String, _messageListener: MessageListener) {
         client = OkHttpClient.Builder()
@@ -31,11 +31,9 @@ object WebSocketManager {
      * connect
      */
     fun connect() {
-        if (isConnect()) {
-            Log.i(TAG, "web socket connected")
-            return
-        }
-        client.newWebSocket(request, createListener())
+        if (!isConnected)
+            client.newWebSocket(request, createListener())
+        isConnected = true
     }
 
     /**
@@ -59,20 +57,13 @@ object WebSocketManager {
     }
 
     /**
-     * Whether to connect
-     */
-    fun isConnect(): Boolean {
-        return isConnect
-    }
-
-    /**
      * send messages
      *
      * @param text string
      * @return boolean
      */
     fun sendMessage(text: String): Boolean {
-        return if (!isConnect()) false else mWebSocket.send(text)
+        return if (!isConnected) false else mWebSocket.send(text)
     }
 
     /**
@@ -82,14 +73,14 @@ object WebSocketManager {
      * @return boolean
      */
     fun sendMessage(byteString: ByteString): Boolean {
-        return if (!isConnect()) false else mWebSocket.send(byteString)
+        return if (!isConnected) false else mWebSocket.send(byteString)
     }
 
     /**
      * Close connection
      */
     fun close() {
-        if (isConnect()) {
+        if (isConnected) {
             mWebSocket.cancel()
             mWebSocket.close( 1001 , "The client actively closes the connection " )
         }
@@ -104,8 +95,8 @@ object WebSocketManager {
                 super.onOpen(webSocket, response)
                 Log.d(TAG, "open:$response")
                 mWebSocket = webSocket
-                isConnect = response.code() == 101
-                if (!isConnect) {
+                isConnected = response.code() == 101
+                if (!isConnected) {
                     reconnect()
                 } else {
                     Log.i(TAG, "connect success.")
@@ -129,7 +120,7 @@ object WebSocketManager {
                 reason: String
             ) {
                 super.onClosing(webSocket, code, reason)
-                isConnect = false
+                isConnected = false
                 messageListener.onClose()
             }
 
@@ -139,7 +130,7 @@ object WebSocketManager {
                 reason: String
             ) {
                 super.onClosed(webSocket, code, reason)
-                isConnect = false
+                isConnected = false
                 messageListener.onClose()
             }
 
@@ -159,7 +150,7 @@ object WebSocketManager {
                     TAG,
                     "connect failed throwable：" + t.message
                 )
-                isConnect = false
+                isConnected = false
                 messageListener.onConnectFailed()
                 reconnect()
             }
