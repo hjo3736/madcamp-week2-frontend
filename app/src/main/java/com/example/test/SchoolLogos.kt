@@ -8,6 +8,7 @@ object SchoolLogos {
             "HYU" -> return R.drawable.hyu
             "SKKU" -> return R.drawable.skku
             "GIST" -> return R.drawable.gist
+            "UNIST" -> return R.drawable.unist
         }
         return R.drawable.unknown
     }

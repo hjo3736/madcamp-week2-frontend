@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -89,8 +90,10 @@ class Adapter (
 
         val ranking : TextView
         val nickname : TextView
-        val school : TextView
+        val school : ImageView
         val eloRating : TextView
+
+        lateinit var schoolinfo : String
 
         init{
 
@@ -110,11 +113,13 @@ class Adapter (
                 val userNickname = dialog.findViewById<TextView>(R.id.forNickname)
                 val userSchool = dialog.findViewById<TextView>(R.id.forSchool)
                 val usereloRating = dialog.findViewById<TextView>(R.id.forelorating)
+                val userScoolImage = dialog.findViewById<ImageView>(R.id.schoolimage)
                 val closeButton = dialog.findViewById<ImageButton>(R.id.close)
 
                 userNickname.setText(nickname.text.toString())
-                userSchool.setText(school.text.toString())
+                userSchool.setText(schoolinfo)
                 usereloRating.setText(eloRating.text.toString())
+                userScoolImage.setImageResource(SchoolLogos.getLogo(schoolinfo))
 
                 closeButton.setOnClickListener{
 
@@ -139,7 +144,8 @@ class Adapter (
 
         holder.ranking.text = (position + 1).toString()
         holder.nickname.text = data[position].nickname
-        holder.school.text = data[position].school
+        holder.schoolinfo = data[position].school
+        holder.school.setImageResource(SchoolLogos.getLogo(data[position].school))
         holder.eloRating.text = data[position].elo_rating
 
     }

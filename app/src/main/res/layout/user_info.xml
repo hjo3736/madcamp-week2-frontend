@@ -89,7 +89,8 @@
             android:layout_weight="5"
             android:src="@drawable/closeimage"
             android:layout_gravity="top"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"/>
 
     </LinearLayout>
 

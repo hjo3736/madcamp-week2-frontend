@@ -18,7 +18,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button_Matching" />
+        app:layout_constraintStart_toEndOf="@+id/button_Matching"/>
 
     <ImageButton
         android:id="@+id/button_Matching"
@@ -45,7 +45,7 @@
         app:srcCompat="@drawable/usericon" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/easterEgg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00FF0000"

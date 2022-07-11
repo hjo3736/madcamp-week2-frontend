@@ -1,6 +1,7 @@
 package com.example.test
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -13,9 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var count = 5
+
         val matchingButton = findViewById<ImageButton>(R.id.button_Matching)
         val leadButton = findViewById<ImageButton>(R.id.button_Leaderboard)
         val myProfile = findViewById<ImageButton>(R.id.myprofile)
+        val easterEgg = findViewById<ImageButton>(R.id.easterEgg)
 
         val email = intent.getStringExtra("email")
 
@@ -39,6 +43,19 @@ class MainActivity : AppCompatActivity() {
             val myinfo = Intent(this, MyInfo::class.java)
             myinfo.putExtra("email", email)
             startActivity(myinfo)
+
+        }
+
+        easterEgg.setOnClickListener{
+
+            count --
+
+            if(count == 0){
+
+                val easteregg = Intent(Intent.ACTION_VIEW, Uri.parse("https://koreaomok.modoo.at/"))
+                startActivity(easteregg)
+
+            }
 
         }
 

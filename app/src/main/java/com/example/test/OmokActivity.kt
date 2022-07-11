@@ -100,8 +100,8 @@ class OmokActivity : AppCompatActivity(), MessageListener {
         opponentRatingTextView = findViewById(R.id.opponentRatingTextView)
         opponentSchoolImageView = findViewById(R.id.opponentSchoolImageView)
 
-//        val email = intent.getStringExtra("email")
-        val email = "leejy31415@gmail.com"
+        val email = intent.getStringExtra("email")
+//        val email = "leejy31415@gmail.com"
 
         omokBoardView = findViewById(R.id.omokBoard);
         concedeButton = findViewById(R.id.concedeButton);
