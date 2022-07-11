@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -100,12 +101,11 @@ class OmokActivity : AppCompatActivity(), MessageListener {
         opponentRatingTextView = findViewById(R.id.opponentRatingTextView)
         opponentSchoolImageView = findViewById(R.id.opponentSchoolImageView)
 
-        val email = intent.getStringExtra("email")
-//        val email = "leejy31415@gmail.com"
+//        val email = intent.getStringExtra("email")
+        val email = "leejy31415@gmail.com"
 
         omokBoardView = findViewById(R.id.omokBoard);
         concedeButton = findViewById(R.id.concedeButton);
-//        recyclerView = findViewById(R.id.recyclerView)
 
         omokBoardView.setOnTouchListener { view, event ->
             if (!myTurn)
@@ -120,7 +120,6 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                         if (board[row][col] == 0) {
                             myTurn = false
                             val gson = Gson()
-                            println(gson.toJson(OmokMove(gameId, player, row, col)))
                             WebSocketManager.sendMessage(gson.toJson(OmokMove(gameId, player, row, col)))
                         }
                     }
@@ -141,12 +140,12 @@ class OmokActivity : AppCompatActivity(), MessageListener {
             val concedeNoButton = dialog.findViewById<Button>(R.id.concedeNo);
 
             concedeYesButton.setOnClickListener {
-                println("Concede YES")
+                val gson = Gson()
+                WebSocketManager.sendMessage(gson.toJson(OmokMove(gameId, player, -1, -1)))
                 dialog.dismiss()
             }
 
             concedeNoButton.setOnClickListener {
-                println("Concede NO")
                 dialog.dismiss()
             }
 
@@ -241,11 +240,9 @@ class OmokActivity : AppCompatActivity(), MessageListener {
 
                     // 선공
                     if (myTurn) {
-                        myNicknameTextView.setTypeface(myNicknameTextView.typeface, Typeface.BOLD)
                         player = 1
                     }
                     else {
-                        opponentNicknameTextView.setTypeface(opponentNicknameTextView.typeface, Typeface.BOLD)
                         player = 2
                     }
 
@@ -269,7 +266,8 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                         "row": int,
                         "col": int,
                         "status": 0, 1, 2 or 3
-                    }
+                    },
+                    "newRating": int
                 }
                 */
                 runOnUiThread {
@@ -277,16 +275,40 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                     val lastPlayer = moveResult.getInt("player")
                     val lastMoveRow = moveResult.getInt("row")
                     val lastMoveCol = moveResult.getInt("col")
-                    this.board[lastMoveRow][lastMoveCol] = lastPlayer
-                    if (this.player != lastPlayer) {
-                        myTurn = true
-                    }
+                    val status = moveResult.getInt("status")
 
-                    placeMove(lastPlayer, lastMoveRow, lastMoveCol)
+                    if (status == 0) {
+                        this.board[lastMoveRow][lastMoveCol] = lastPlayer
+                        if (this.player != lastPlayer) {
+                            myTurn = true
+                        }
+
+                        placeMove(lastPlayer, lastMoveRow, lastMoveCol)
+                    }
+                    else {
+                        val dialog = Dialog(this)
+                        val newRating = msg.getInt("newRating")
+                        dialog.setContentView(R.layout.game_result_dialog)
+                        val winOrLose = dialog.findViewById<TextView>(R.id.winOrLose)
+
+                        if (status == 3) {
+                            winOrLose.text = "무승부"
+                        }
+                        else {
+                            winOrLose.text = if (status == player) "승리" else "패배"
+                        }
+
+                        dialog.findViewById<TextView>(R.id.myOldRating).text = myRating.toString()
+                        dialog.findViewById<TextView>(R.id.myNewRating).text = newRating.toString()
+                        dialog.findViewById<Button>(R.id.okButton).setOnClickListener {
+                            WebSocketManager.close()
+                            finish()
+                        }
+
+                        dialog.show()
+                    }
                 }
             }
-
-            "newRating" -> {}
         }
     }
 
