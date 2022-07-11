@@ -24,7 +24,6 @@ class LoginCheck : AppCompatActivity() {
     val GOOGLE_LOGIN = 1000
     lateinit var mGoogleSignInClient : GoogleSignInClient
     lateinit var queue : RequestQueue
-    val ip = "http://192.249.18.128"
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -60,7 +59,7 @@ class LoginCheck : AppCompatActivity() {
 
             if (queue != null) {
 
-                val log = ip + "/user/login/email/" + GoogleSignIn.getLastSignedInAccount(this)?.email.toString()
+                val log = IP.getIP() + "/user/login/email/" + GoogleSignIn.getLastSignedInAccount(this)?.email.toString()
 
                 val stringRequest = StringRequest(Request.Method.GET,
                     log,
@@ -120,7 +119,7 @@ class LoginCheck : AppCompatActivity() {
 
                     if (queue != null) {
 
-                        val log = ip + "/user/login/email/" + task.signInAccount!!.email
+                        val log = IP.getIP() + "/user/login/email/" + task.signInAccount!!.email
 
                         val stringRequest = StringRequest(Request.Method.GET,
                             log,

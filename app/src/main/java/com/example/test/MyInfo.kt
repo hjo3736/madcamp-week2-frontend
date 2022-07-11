@@ -22,7 +22,6 @@ class MyInfo : AppCompatActivity() {
 
     lateinit var mGoogleSignInClient : GoogleSignInClient
     lateinit var queue : RequestQueue
-    val ip = "http://192.249.18.128"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +42,7 @@ class MyInfo : AppCompatActivity() {
 
         if(queue != null){
 
-            val log = ip + "/user/email/" + email
+            val log = IP.getIP() + "/user/email/" + email
 
             val jsonArraytRequest = JsonArrayRequest(Request.Method.GET,
                 log,null,
@@ -106,7 +105,7 @@ class MyInfo : AppCompatActivity() {
 
                 if (queue != null) {
 
-                    val log = ip + "/user/delete/email/" + email
+                    val log = IP.getIP() + "/user/delete/email/" + email
 
                     val stringRequest = StringRequest(Request.Method.DELETE,
                         log,

@@ -19,7 +19,6 @@ import com.android.volley.toolbox.Volley
 class SignUP : AppCompatActivity() {
 
     lateinit var queue : RequestQueue
-    val ip = "http://172.10.18.128"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +54,7 @@ class SignUP : AppCompatActivity() {
 
                 queue = Volley.newRequestQueue(this)
 
-                val log = ip + "/user/signup/email/" + email + "/nickname/" + nickname + "/school/" + school
+                val log = IP.getIP() + "/user/signup/email/" + email + "/nickname/" + nickname + "/school/" + school
 
                 val stringRequest = StringRequest(Request.Method.POST,
                 log,

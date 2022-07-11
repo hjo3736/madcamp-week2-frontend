@@ -24,7 +24,6 @@ import com.android.volley.toolbox.Volley
 import java.security.AccessController.getContext
 
 lateinit var queue : RequestQueue
-val ip = "http://192.249.18.128"
 
 var data = ArrayList<LeaderboardData>()
 lateinit var context1: Context
@@ -44,7 +43,7 @@ class LeaderBoard : AppCompatActivity() {
 
         queue = Volley.newRequestQueue(this)
 
-        val log = ip + "/leaderboard"
+        val log = IP.getIP() + "/leaderboard"
 
         val stringRequest = JsonArrayRequest(Request.Method.GET,
             log, null,

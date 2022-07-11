@@ -101,8 +101,8 @@ class OmokActivity : AppCompatActivity(), MessageListener {
         opponentRatingTextView = findViewById(R.id.opponentRatingTextView)
         opponentSchoolImageView = findViewById(R.id.opponentSchoolImageView)
 
-//        val email = intent.getStringExtra("email")
-        val email = "leejy31415@gmail.com"
+        val email = intent.getStringExtra("email")
+//        val email = "leejy31415@gmail.com"
 
         omokBoardView = findViewById(R.id.omokBoard);
         concedeButton = findViewById(R.id.concedeButton);
@@ -154,7 +154,7 @@ class OmokActivity : AppCompatActivity(), MessageListener {
 
         queue = Volley.newRequestQueue(this)
 
-        val log = "$ip/user/email/$email"
+        val log = "${IP.getIP()}/user/email/$email"
         val myInfoRequest = JsonArrayRequest(
             Request.Method.GET,
             log,null,
