@@ -1,18 +1,25 @@
 package com.example.test
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.updateLayoutParams
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
@@ -60,6 +67,27 @@ class OmokActivity : AppCompatActivity(), MessageListener {
     private lateinit var searchGameDlg: Dialog
     private lateinit var foundGameDialog: Dialog
 
+    fun placeMove(player: Int, row: Int, col: Int, ) {
+        val imageView = ImageView(this)
+        imageView.setImageResource(getPieceColor(player))
+        imageView.requestLayout()
+
+        val constraintLayout = findViewById<ConstraintLayout>(R.id.constraintLayout)
+        imageView.layoutParams = ConstraintLayout.LayoutParams(
+            boardWidth / boardSize,
+            boardWidth / boardSize
+        )
+
+        imageView.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            startToStart = omokBoardView.id
+            topToTop = omokBoardView.id
+            marginStart = col * (boardWidth / boardSize)
+            topMargin = row * (boardWidth / boardSize)
+        }
+
+        constraintLayout.addView(imageView)
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +105,7 @@ class OmokActivity : AppCompatActivity(), MessageListener {
 
         omokBoardView = findViewById(R.id.omokBoard);
         concedeButton = findViewById(R.id.concedeButton);
+//        recyclerView = findViewById(R.id.recyclerView)
 
         omokBoardView.setOnTouchListener { view, event ->
             if (!myTurn)
@@ -85,8 +114,8 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                 val action = event.action
                 when (action) {
                     MotionEvent.ACTION_UP -> {
-                        val col = ((event.x.toInt() * (boardSize + 1)) / boardWidth)
-                        val row = ((event.y.toInt() * (boardSize + 1)) / boardWidth)
+                        val col = (event.x.toInt() * (boardSize) / boardWidth)
+                        val row = (event.y.toInt() * (boardSize) / boardWidth)
                         println("row = $row\t col=$col")
                         if (board[row][col] == 0) {
                             myTurn = false
@@ -94,18 +123,6 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                             println(gson.toJson(OmokMove(gameId, player, row, col)))
                             WebSocketManager.sendMessage(gson.toJson(OmokMove(gameId, player, row, col)))
                         }
-
-                        val imageView = ImageView(this)
-                        imageView.setImageResource(getPieceColor(player))
-                        val constraintLayout = findViewById<ConstraintLayout>(R.id.constraintLayout)
-                        val layoutParams = ConstraintLayout.LayoutParams(
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT
-                        )
-                        val cs = ConstraintSet()
-                        cs.connect(imageView.id, ConstraintSet.TOP, R.drawable.omok_board, ConstraintSet.START, R.drawable.omok_board)
-                        cs.applyTo(constraintLayout)
-                        constraintLayout.addView(imageView)
                     }
                     else -> {
 
@@ -233,7 +250,7 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                     }
 
                     findViewById<ImageView>(R.id.myColor).setImageResource(getPieceColor(player))
-                    findViewById<ImageView>(R.id.myColor).setImageResource(getPieceColor(3 - player))
+                    findViewById<ImageView>(R.id.opponentColor).setImageResource(getPieceColor(3 - player))
 
                     searchGameDlg.dismiss()
                     foundGameDialog.show()
@@ -255,13 +272,17 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                     }
                 }
                 */
-                val moveResult = msg.getJSONObject("moveResult")
-                val lastPlayer = moveResult.getInt("player")
-                val lastMoveRow = moveResult.getInt("row")
-                val lastMoveCol = moveResult.getInt("col")
-                this.board[lastMoveRow][lastMoveCol] = lastPlayer
-                if (this.player != lastPlayer) {
-                    myTurn = true
+                runOnUiThread {
+                    val moveResult = msg.getJSONObject("moveResult")
+                    val lastPlayer = moveResult.getInt("player")
+                    val lastMoveRow = moveResult.getInt("row")
+                    val lastMoveCol = moveResult.getInt("col")
+                    this.board[lastMoveRow][lastMoveCol] = lastPlayer
+                    if (this.player != lastPlayer) {
+                        myTurn = true
+                    }
+
+                    placeMove(lastPlayer, lastMoveRow, lastMoveCol)
                 }
             }
 

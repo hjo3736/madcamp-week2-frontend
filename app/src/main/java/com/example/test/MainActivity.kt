@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val matchingButton = findViewById<Button>(R.id.button_Matching)
-        val leadButton = findViewById<Button>(R.id.button_Leaderboard)
+        val matchingButton = findViewById<ImageButton>(R.id.button_Matching)
+        val leadButton = findViewById<ImageButton>(R.id.button_Leaderboard)
         val myProfile = findViewById<ImageButton>(R.id.myprofile)
 
         val email = intent.getStringExtra("email")
