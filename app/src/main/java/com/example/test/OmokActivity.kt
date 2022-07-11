@@ -1,26 +1,17 @@
 package com.example.test
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
-import android.content.Context
-import android.content.Intent
 import android.content.res.Resources
-import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.updateLayoutParams
-import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
@@ -166,7 +157,7 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                     myRating = myRatingTextView.text.toString().toInt()
 
                     mySchool = response.getJSONObject(0).getString("school")
-                    mySchoolImageView.setImageResource(SchoolLogos.getLogo(mySchool))
+                    mySchoolImageView.setImageResource(SchoolInfo.getLogo(mySchool))
 
                     val wsConUrl = "$serverUrl?nickname=$myNickname&elo_rating=$myRating&school=$mySchool"
                     WebSocketManager.init(wsConUrl, this)
@@ -193,6 +184,11 @@ class OmokActivity : AppCompatActivity(), MessageListener {
 
         omokBoardView.layoutParams.width = boardWidth
         omokBoardView.layoutParams.height = boardWidth
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        WebSocketManager.close(myNickname)
     }
 
     override fun onConnectSuccess() {}
@@ -254,7 +250,7 @@ class OmokActivity : AppCompatActivity(), MessageListener {
 
                     opponentNicknameTextView.text = opponentNickname
                     opponentRatingTextView.text = opponentRating.toString()
-                    opponentSchoolImageView.setImageResource(SchoolLogos.getLogo(opponentSchool))
+                    opponentSchoolImageView.setImageResource(SchoolInfo.getLogo(opponentSchool))
                 }
             }
             "moveResult" -> {
@@ -301,7 +297,7 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                         dialog.findViewById<TextView>(R.id.myOldRating).text = myRating.toString()
                         dialog.findViewById<TextView>(R.id.myNewRating).text = newRating.toString()
                         dialog.findViewById<Button>(R.id.okButton).setOnClickListener {
-                            WebSocketManager.close()
+                            WebSocketManager.close(myNickname)
                             finish()
                         }
 
@@ -314,6 +310,6 @@ class OmokActivity : AppCompatActivity(), MessageListener {
 
     override fun onDestroy() {
         super.onDestroy ()
-        WebSocketManager.close()
+        WebSocketManager.close(myNickname)
     }
 }

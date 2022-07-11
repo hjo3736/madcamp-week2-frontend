@@ -1,6 +1,5 @@
 package com.example.test
 
-import android.content.ContextParams
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -8,16 +7,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
+import android.widget.Spinner
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-
+import java.util.*
 
 class SignUP : AppCompatActivity() {
-
     lateinit var queue : RequestQueue
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,51 +28,46 @@ class SignUP : AppCompatActivity() {
 
         textEmail.setText(intent.getStringExtra("key"))
 
-        button.setOnClickListener{
+        val schoolNames = resources.getStringArray(R.array.school_array).map { s -> School(s) }.toList()
+        val schoolAdapter = SchoolAdapter(this, schoolNames)
+        findViewById<Spinner>(R.id.schoolSpinner).adapter = schoolAdapter
 
+        button.setOnClickListener {
             val email = textEmail.text.toString()
             val nickname = textNickname.text.toString()
             val school = textSchool.text.toString()
 
-            if(nickname == "" && school == ""){
-
+            if(nickname == "" && school == "") {
                 textNickname.setHintTextColor(Color.RED)
                 textSchool.setHintTextColor(Color.RED)
-
-            }else if(nickname == "" && school != ""){
-
+            }
+            else if (nickname == "" && school != "") {
                 textNickname.setHintTextColor(Color.RED)
-
-            }else if(school == "" && nickname != ""){
-
+            }
+            else if (school == "" && nickname != "") {
                 textSchool.setHintTextColor(Color.RED)
-
-            }else{
-
+            }
+            else {
                 queue = Volley.newRequestQueue(this)
 
                 val log = IP.getIP() + "/user/signup/email/" + email + "/nickname/" + nickname + "/school/" + school
 
-                val stringRequest = StringRequest(Request.Method.POST,
-                log,
-                Response.Listener<String>{ response ->
-
-                    val main = Intent(this, MainActivity::class.java)
-                    main.putExtra("email", email)
-                    startActivity(main)
-                    finish()
-
-                },
-                Response.ErrorListener{ error ->
-                    Log.d("bad", error.message.toString())
-                })
+                val stringRequest = StringRequest(
+                    Request.Method.POST,
+                    log,
+                    { response ->
+                        val main = Intent(this, MainActivity::class.java)
+                        main.putExtra("email", email)
+                        startActivity(main)
+                        finish()
+                    },
+                    { error ->
+                        Log.d("bad", error.message.toString())
+                    })
 
                 stringRequest.setShouldCache(false)
                 queue.add(stringRequest)
-
             }
-
         }
-
     }
 }

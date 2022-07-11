@@ -1,7 +1,6 @@
 package com.example.test
 
 import android.app.Dialog
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,7 +20,6 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import java.security.AccessController.getContext
 
 lateinit var queue : RequestQueue
 
@@ -118,7 +116,7 @@ class Adapter (
                 userNickname.setText(nickname.text.toString())
                 userSchool.setText(schoolinfo)
                 usereloRating.setText(eloRating.text.toString())
-                userScoolImage.setImageResource(SchoolLogos.getLogo(schoolinfo))
+                userScoolImage.setImageResource(SchoolInfo.getLogo(schoolinfo))
 
                 closeButton.setOnClickListener{
 
@@ -144,7 +142,7 @@ class Adapter (
         holder.ranking.text = (position + 1).toString()
         holder.nickname.text = data[position].nickname
         holder.schoolinfo = data[position].school
-        holder.school.setImageResource(SchoolLogos.getLogo(data[position].school))
+        holder.school.setImageResource(SchoolInfo.getLogo(data[position].school))
         holder.eloRating.text = data[position].elo_rating
 
     }

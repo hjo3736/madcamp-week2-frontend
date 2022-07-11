@@ -53,6 +53,14 @@
         android:inputType="textPersonName"
         android:hint="소속 학교를 입력해 주세요" />
 
+    <Spinner
+        android:id="@+id/schoolSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+
     <Button
         android:id="@+id/button_sign_up"
         android:layout_width="match_parent"
