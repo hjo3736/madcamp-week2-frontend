@@ -202,9 +202,6 @@ class OmokActivity : AppCompatActivity() {
         }
 
         constraintLayout.addView(imageView)
-
-        val mediaPlayer = MediaPlayer.create(this, R.raw.sound_fin)
-        mediaPlayer.start()
     }
 
     @SuppressLint("ClickableViewAccessibility")
