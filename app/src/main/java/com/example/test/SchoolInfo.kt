@@ -9,13 +9,15 @@ import android.widget.ImageView
 import android.widget.TextView
 
 object SchoolInfo {
-    private val schools = mapOf<String, Pair<String, Int>>(
+    val schools = mapOf<String, Pair<String, Int>>(
         "KAIST" to Pair("한국과학기술원", R.mipmap.kaist),
         "POSTECH" to Pair("포항공과대학교", R.drawable.postech),
         "HYU" to Pair("한양대학교", R.drawable.hyu),
         "SKKU" to Pair("성균관대학교", R.drawable.skku),
         "GIST" to Pair("광주과학기술원", R.drawable.gist),
         "UNIST" to Pair("울산과학기술원", R.drawable.unist),
+        "KOREA" to Pair("고려대학교", R.drawable.korea),
+        "BUSAN" to Pair("부산대학교", R.drawable.busan)
     )
     fun getLogo(shortName: String):Int {
         return schools[shortName]?.second ?: R.drawable.unknown

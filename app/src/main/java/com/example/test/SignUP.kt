@@ -28,7 +28,7 @@ class SignUP : AppCompatActivity() {
 
         textEmail.setText(intent.getStringExtra("key"))
 
-        val schoolNames = resources.getStringArray(R.array.school_array).map { s -> School(s) }.toList()
+        val schoolNames = SchoolInfo.schools.keys.toList().map { s -> School(s) }
         val schoolAdapter = SchoolAdapter(this, schoolNames)
         schoolSpinner.adapter = schoolAdapter
 

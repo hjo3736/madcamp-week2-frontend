@@ -172,7 +172,12 @@ class OmokActivity : AppCompatActivity(), MessageListener {
 
         searchGameDlg = Dialog(this)
         searchGameDlg.setContentView(R.layout.search_game_dialog)
+        searchGameDlg.setCancelable(false)
         searchGameDlg.setCanceledOnTouchOutside(false)
+        val cancelSearchButton = searchGameDlg.findViewById<Button>(R.id.cancelSearchButton)
+        cancelSearchButton.setOnClickListener {
+            finish()
+        }
 
         foundGameDialog = Dialog(this)
         foundGameDialog.setContentView(R.layout.found_game_dialog)
@@ -186,16 +191,18 @@ class OmokActivity : AppCompatActivity(), MessageListener {
         omokBoardView.layoutParams.height = boardWidth
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        WebSocketManager.close(myNickname)
-    }
+//    override fun onBackPressed() {
+//        super.onBackPressed()
+//        WebSocketManager.close(myNickname)
+//    }
 
     override fun onConnectSuccess() {}
 
     override fun onConnectFailed() {}
 
-    override fun onClose() {}
+    override fun onClose() {
+        println("HERE!")
+    }
 
     override fun onMessage(text: String?) {
         val msg = JSONTokener(text).nextValue() as JSONObject
@@ -220,11 +227,6 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                 }
                 */
                 runOnUiThread {
-                    if (!searchGameDlg.isShowing) {
-                        searchGameDlg.show()
-                        Thread.sleep(1000)
-                    }
-
                     val opponent = msg.getJSONObject("opponent")
                     val opponentNickname = opponent.getString("nickname")
                     val opponentRating = opponent.getInt("elo_rating")
@@ -245,7 +247,6 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                     findViewById<ImageView>(R.id.myColor).setImageResource(getPieceColor(player))
                     findViewById<ImageView>(R.id.opponentColor).setImageResource(getPieceColor(3 - player))
 
-                    searchGameDlg.dismiss()
                     foundGameDialog.show()
 
                     opponentNicknameTextView.text = opponentNickname
@@ -297,7 +298,6 @@ class OmokActivity : AppCompatActivity(), MessageListener {
                         dialog.findViewById<TextView>(R.id.myOldRating).text = myRating.toString()
                         dialog.findViewById<TextView>(R.id.myNewRating).text = newRating.toString()
                         dialog.findViewById<Button>(R.id.okButton).setOnClickListener {
-                            WebSocketManager.close(myNickname)
                             finish()
                         }
 
@@ -309,7 +309,9 @@ class OmokActivity : AppCompatActivity(), MessageListener {
     }
 
     override fun onDestroy() {
-        super.onDestroy ()
-        WebSocketManager.close(myNickname)
+        runOnUiThread {
+            super.onDestroy ()
+            WebSocketManager.close(myNickname)
+        }
     }
 }
