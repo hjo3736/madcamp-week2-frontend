@@ -3,6 +3,7 @@ package com.example.test
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.res.Resources
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
@@ -78,6 +79,9 @@ class OmokActivity : AppCompatActivity(), MessageListener {
         }
 
         constraintLayout.addView(imageView)
+        val mediaPlayer = MediaPlayer.create(this, R.raw.sound_cut)
+        mediaPlayer.start()
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
