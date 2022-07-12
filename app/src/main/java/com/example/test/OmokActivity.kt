@@ -64,6 +64,7 @@ class OmokActivity : AppCompatActivity() {
     private lateinit var opponentSchoolImageView: ImageView
     private lateinit var searchGameDlg: Dialog
     private lateinit var foundGameDialog: Dialog
+    private lateinit var gameResultDialog: Dialog
 
     // websocket stuff
     private lateinit var client: OkHttpClient
@@ -102,9 +103,11 @@ class OmokActivity : AppCompatActivity() {
                         val opponentRating = opponent.getInt("elo_rating")
                         val opponentSchool = opponent.getString("school")
                         gameId = msg.getString("gameId")
-                        println(gameId)
-
                         myTurn = msg.getInt("player") == 1
+
+                        if (searchGameDlg.isShowing) {
+                            searchGameDlg.dismiss()
+                        }
 
                         // 선공
                         if (myTurn) {
@@ -153,10 +156,9 @@ class OmokActivity : AppCompatActivity() {
                             placeMove(lastPlayer, lastMoveRow, lastMoveCol)
                         }
                         else {
-                            val dialog = Dialog(applicationContext)
                             val newRating = msg.getInt("newRating")
-                            dialog.setContentView(R.layout.game_result_dialog)
-                            val winOrLose = dialog.findViewById<TextView>(R.id.winOrLose)
+                            gameResultDialog.setContentView(R.layout.game_result_dialog)
+                            val winOrLose = gameResultDialog.findViewById<TextView>(R.id.winOrLose)
 
                             if (status == 3) {
                                 winOrLose.text = "무승부"
@@ -165,13 +167,14 @@ class OmokActivity : AppCompatActivity() {
                                 winOrLose.text = if (status == player) "승리" else "패배"
                             }
 
-                            dialog.findViewById<TextView>(R.id.myOldRating).text = myRating.toString()
-                            dialog.findViewById<TextView>(R.id.myNewRating).text = newRating.toString()
-                            dialog.findViewById<Button>(R.id.okButton).setOnClickListener {
+                            gameResultDialog.findViewById<TextView>(R.id.myOldRating).text = myRating.toString()
+                            gameResultDialog.findViewById<TextView>(R.id.myNewRating).text = newRating.toString()
+                            gameResultDialog.findViewById<Button>(R.id.okButton).setOnClickListener {
+                                gameResultDialog.dismiss()
                                 finish()
                             }
 
-                            dialog.show()
+                            gameResultDialog.show()
                         }
                     }
                 }
@@ -211,7 +214,6 @@ class OmokActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_omok)
-
 
         myNicknameTextView = findViewById(R.id.myNicknameTextView)
         myRatingTextView = findViewById(R.id.myRatingTextView)
@@ -318,6 +320,8 @@ class OmokActivity : AppCompatActivity() {
         btn.setOnClickListener {
             foundGameDialog.dismiss()
         }
+
+        gameResultDialog = Dialog(this)
 
         omokBoardView.layoutParams.width = boardWidth
         omokBoardView.layoutParams.height = boardWidth
