@@ -16,8 +16,8 @@ object SchoolInfo {
         "SKKU" to Pair("성균관대학교", R.drawable.skku),
         "GIST" to Pair("광주과학기술원", R.drawable.gist),
         "UNIST" to Pair("울산과학기술원", R.drawable.unist),
-        "KOREA" to Pair("고려대학교", R.drawable.korea),
-        "BUSAN" to Pair("부산대학교", R.drawable.busan)
+        "KOREA" to Pair("고려대학교", R.mipmap.korea),
+        "BUSAN" to Pair("부산대학교", R.mipmap.busan)
     )
     fun getLogo(shortName: String):Int {
         return schools[shortName]?.second ?: R.drawable.unknown

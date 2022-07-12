@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
@@ -55,7 +56,7 @@ class SignUP : AppCompatActivity() {
                         finish()
                     },
                     { error ->
-                        Log.d("bad", error.message.toString())
+                        Toast.makeText(applicationContext, "이미 존재하는 닉네임입니다",Toast.LENGTH_LONG).show()
                     })
 
                 stringRequest.setShouldCache(false)

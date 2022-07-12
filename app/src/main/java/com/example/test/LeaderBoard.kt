@@ -114,7 +114,7 @@ class Adapter (
                 val closeButton = dialog.findViewById<ImageButton>(R.id.close)
 
                 userNickname.setText(nickname.text.toString())
-                userSchool.setText(schoolinfo)
+                userSchool.setText(SchoolInfo.getLongName(schoolinfo))
                 usereloRating.setText(eloRating.text.toString())
                 userScoolImage.setImageResource(SchoolInfo.getLogo(schoolinfo))
 

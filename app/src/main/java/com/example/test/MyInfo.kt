@@ -48,7 +48,9 @@ class MyInfo : AppCompatActivity() {
                 log,null,
                 Response.Listener{response ->
                     mnickname.setText(response.getJSONObject(0).getString("nickname"))
-                    mschool.setText(response.getJSONObject(0).getString("school"))
+                    mschool.setText(
+                        SchoolInfo.getLongName(response.getJSONObject(0).getString("school"))
+                    )
                     melo.setText(response.getJSONObject(0).getString("elo_rating"))
                 },
                 Response.ErrorListener { error ->
