@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">오목</string>
+    <string name="app_name">몰입오목</string>
     <string name="server_client_id">234598572164-t5onio0m4gph1d74lbfm5ra4n910aipu.apps.googleusercontent.com</string>
     <string name="title_activity_login_success">LoginSuccess</string>
     <!-- Strings used for fragments for navigation -->
