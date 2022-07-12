@@ -5,24 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".SignUP">
-
-    <ImageView
-        android:id="@+id/userImage"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="3"
-        tools:srcCompat="@tools:sample/avatars"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"/>
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="40dp"
         android:ems="10"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -34,24 +23,21 @@
     <EditText
         android:id="@+id/editTextNickname"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="닉네임을 입력해 주세요" />
 
-    <EditText
-        android:id="@+id/editTextSchool"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:text="소속 학교를 선택해 주세요"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="소속 학교를 입력해 주세요" />
+        android:layout_marginRight="20dp"/>
 
     <Spinner
         android:id="@+id/schoolSpinner"
@@ -64,8 +50,7 @@
     <Button
         android:id="@+id/button_sign_up"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="회원가입" />

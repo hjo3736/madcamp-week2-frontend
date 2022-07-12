@@ -24,28 +24,21 @@ class SignUP : AppCompatActivity() {
         val button = findViewById<Button>(R.id.button_sign_up)
         val textEmail = findViewById<EditText>(R.id.editTextEmail)
         val textNickname = findViewById<EditText>(R.id.editTextNickname)
-        val textSchool = findViewById<EditText>(R.id.editTextSchool)
+        val schoolSpinner = findViewById<Spinner>(R.id.schoolSpinner)
 
         textEmail.setText(intent.getStringExtra("key"))
 
         val schoolNames = resources.getStringArray(R.array.school_array).map { s -> School(s) }.toList()
         val schoolAdapter = SchoolAdapter(this, schoolNames)
-        findViewById<Spinner>(R.id.schoolSpinner).adapter = schoolAdapter
+        schoolSpinner.adapter = schoolAdapter
 
         button.setOnClickListener {
             val email = textEmail.text.toString()
             val nickname = textNickname.text.toString()
-            val school = textSchool.text.toString()
+            val school = (schoolSpinner.selectedItem as School).shortName
 
-            if(nickname == "" && school == "") {
+            if (nickname == "") {
                 textNickname.setHintTextColor(Color.RED)
-                textSchool.setHintTextColor(Color.RED)
-            }
-            else if (nickname == "" && school != "") {
-                textNickname.setHintTextColor(Color.RED)
-            }
-            else if (school == "" && nickname != "") {
-                textSchool.setHintTextColor(Color.RED)
             }
             else {
                 queue = Volley.newRequestQueue(this)
